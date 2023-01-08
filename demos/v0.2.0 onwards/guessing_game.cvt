@@ -1,0 +1,29 @@
+var input create
+>startGame
+print Enter the maximum possible number:
+var target create ¦+ random 1 ¦+ read +¦ +¦
+
+>guess
+print Enter your guess: 
+var input set ¦+ read +¦
+
+if ¬input¬ = ¬target¬ >win
+if ¬input¬ > ¬target¬ >high
+println ¬input¬ is too low! Guess again!
+goto >guess
+
+>high
+println ¬input¬ is too high! Guess again!
+goto >guess
+
+>win
+println ¬input¬ is correct! You win! Do you want to play again? (y/n)
+var target delete
+>playAgain
+setVar input ¦+ read +¦
+if ¬input¬ = y >startGame
+if ¬input¬ = n >endGame
+goto >playAgain
+
+>endGame
+end

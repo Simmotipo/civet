@@ -1,0 +1,107 @@
+array <name> add <value>
+array <name> contains <value>
+array <name> count
+array <name> create
+array <name> delete
+array <name> exclusiveAdd <value> -- only adds if list does not already contain <value>
+array <name> get <index>
+array <name> indexOf <value> -- returns -1 if not found.
+array <name> remove <value> -- removes first occurance only (throws error if value not found)
+array <name> removeAll <value> -- removes all occurances (does not throw an error if not found)
+array <name> remoteAt <index>
+array <name> renameArray <newArrayName>
+array <name> set <index> <value>
+clear
+end
+exit
+file <fileObjectName> appendText <content>
+file <fileObjectName> copyTo <filePath>
+file <fileObjectName> deleteFile
+file <fileObjectName> deleteFileObject
+file <fileObjectName> filePath <filePath> -- Assigns <filePath> to <fileObjectName>. Contents of file at <filePath> are loaded on an ad-hoc bases whenever <fileObjectName> is used.
+file <fileObjectName> moveTo <filePath>
+file <fileObjectName> readText
+file <fileObjectName> readTextLine <index>
+file <fileObjectName> renameFile <newFileName>
+file <fileObjectName> renameFileObject <newFileObjectName>
+file <fileObjectName> writeText <content>
+if <val1> <condition> <val2> <optional: Combiner> etc.
+goto >flagName
+goto <lineNumber>
+http <port> start
+http <port> stop
+math <stringFunction> (Variables parsed by interpreter)
+mathEngine <stringFunction> (Variables parsed by mathEngine; all variables must be numerable)
+newVar <varName> <optionalValue>
+print <string> (quote-encapsulation not required)
+println <string> (quote-encapsulation not required)
+random <lowerBound> <upperBound>
+read
+setVar varName newValue
+simpleReadFile <filePath> -- replace spaces in file path name with `_  !!)
+simpleWriteFile <filePath> <content> -- replace spaces in file path name with `_  !!
+string "input" contains "comparator" -- returns 'true' or 'false'  as strings
+string "input" indexOf "searchTerm" -- returns index of first value, or -1.
+string "input" length
+string "input" lowercase
+string "input" replace "oldString" "newString"
+string "input" reverse
+string "input" substring startIndex optionalLength
+string "input" uppercase
+sysconfig <debug/debugOnError/printErrors> <true/false>
+var <varName> create <optionalValue>
+var <varName> delete
+var <varName> get -- equivalent of ¬varName¬
+var <varName> renameVar <newVarName>
+var <varName> set <value>
+
+--- Commands Coming Soon:
+
+note -- these functions have been created w/i array object, just need parsing in arrayMgr
+array <name> replace <oldValue> <newValue> -- replaces first occurance of <oldValue>. Throws error if not found. (either on word, or quote-mark encapsulated)
+array <name> replaceAll <oldValue> <newValue> -- replaces all instances of <oldValue>. Does not throw error if not found (either on word, or quote-mark encapsulated)
+
+file <fileObjectName> readBytes <arrayName> -- reads bytes of file, converting all bytes into ints, and storing them in an array <arrayName>. If <arrayName> does not exist, it is created, otherwise, it is overwritten.
+file <fileObjectName> readByte <index> -- returns integer equivalent of byte.
+
+http <port> exportConfig <filePath>
+http <port> importConfig <filePath>
+http <port> subscribe <function> <varName> <optional: path> -- path being for http://ip/path etc. .. ¬varName¬ is where message content is stored
+
+string "input" endsWith "comparator"
+string "input" split "splitter"
+string "input" startsWith "comparator"
+
+udp <port> exportConfig <filePath>
+udp <port> importConfig <filePath>
+udp <port> start
+udp <port> stop
+udp <port> onMessage <function> <varName> -- will run on receipt of UDP packet.Message data contained in ¬varName¬
+
+--- Features Coming Soon:
+
+]] Planned v0.4
+File ReadByte as int
+HTTP Server
+Create and Delete folders
+
+]] Planned v0.5
+Load functions / Flag Points (>flagName) from other files, for multi-file programs.
+Run other CIVET files
+Run other EXE files
+Execute COMMAND PROMPT / TERMINAL commands.
+
+]] Planned v0.6
+Support for ¬arrayName#index¬ as an alias for ¦+ array <arrayName> get <index> +¦
+Additional StringUtils features (startsWith, endsWith, Split)
+File ReadBytes
+
+]] Planned v0.7
+UDP Server
+Convert INT to CHAR + vv.
+
+]] Planned v0.9
+Deprecate Broken Bar symbol (¦) for embedded commands (removing ¦+ and +¦). Use Pipe symbol (|) instead (|+ and +|) (to prevent any risk of weird mixing of ¦ and | commands in one line)
+
+]] Planned (other)
+Support for Quote-mark encapsulation of multi-word strings in more more functions. (Ongoing)

@@ -1,0 +1,4 @@
+newVar equation
+>start
+println ¬equation¬ = ¦+ math ¬equation¬ ¦+ setVar equation ¦+ read ¦+ print Enter your mathematical equation:  +¦ +¦ +¦ +¦
+goto >start

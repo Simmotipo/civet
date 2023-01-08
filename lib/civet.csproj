@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <AssemblyName>civet</AssemblyName>
+    <StartupObject>civet.Program</StartupObject>
+    <RootNamespace>civet</RootNamespace>
+    <SignAssembly>false</SignAssembly>
+    <Authors>Oliver Simpson</Authors>
+    <Product>Civet (Interpreter)</Product>
+    <Description>Civet Intepreter</Description>
+    <ApplicationIcon>system_cvt.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="system_cvt.ico" />
+  </ItemGroup>
+
+</Project>

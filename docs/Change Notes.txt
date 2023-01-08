@@ -1,0 +1,69 @@
+Change Notes
+----
+This document outlines changes from previous versions. Not all changes may be documented.
+----
+
+>>> v0.4.0a2 - XX/XX/XXXX
+]] + Added HTTP server commands (http <port> <register/importConfig/exportConfig> <...> commands
+]] + Added ability to create, rename and delete folders
+]] + Added ability to ReadByte from file as Integer
+]] + Added "ReadOnly" command-line flag to prevent modification to parent system (Prevents creation, editing and deletion of Files in File System.)
+]] + Added programmatic behaviour for ReadOnly flag. Enabling ReadOnly can be done programmatically (may help prevent program hijacking), but cannot be disabled programmatically.
+
+>>> v0.4.0a1 - 27/11/2022
++ Added HTTP server (http <port> <start/stop> commands
++ Added ability to use Pipe Symbol (|) for embedded commands (|+ and +|) for better linux compatibility. The Broken Bar Symbol (¦) variants will be deprecated in a future version (after v0.9.x at the latest).
++ Added exit command as alias for end command
+* Ported CIVET to .NET 7
+* CIVET now requires Administrator elevation
+
+
+>>> v0.3.0a2 - 15/11/2022
++ Added Clear command
++ Added Count and Contains commands for Arrays.
++ Added sysConfig command for setting debug/breakOnError/printErrors programmatically
+* Fixed bug where all array commands were being ignored
+* Fixed bug where array commands incorrectly applied case-sensitivity
+* Fixed variable and array get-based commands returning empty.
+* Fixed bug where the command keyword is determined before variables are resolved, preventing the creation of a live-editor.
+
+
+>>> v0.3.0a1 - 14/11/2022
++ Added <contains>, <length> and <indexOf> functions to StringUtils
++ Added Arrays with <create/delete/add/exclusiveAdd/get/indexOf/remove/removeAll/removeAt/renameArray>
+* Fixed bug where the final condition in any if statement with 2 or more conditions not being evaluated
+* Interpreter code cleanliness improvements to natively meet IEEE specification for C# 8.0
+
+
+>>> v0.2.1a1 - 13/11/2022
++ Added ability to rename variables and fileObjects
++ Added ability to move, copy and rename files using fileObjects (<renameFile/copyTo/moveTo>)
+
+
+>>> v0.2.0a2 - 12/11/2022
++ Added support for Exponent and Modulo in math engine (^ and %)
++ Added support for NOR in conditional statements (!|)
++ Added simpleReadFile and simpleWriteFile commands. Use `_ in place of spaces in file paths.
++ Added StringUtils to perform Uppercase, Lowercase, Substring, Replace and Reverse functions, plus associated errors.
++ Added "var <varName> <create/set/delete> <value>" syntax for variable control
++ Added ability to delete variables
++ Added File Manager framework for basic file processing. <filePath/readText/readTextLine/writeText/appendText/deleteFile/deleteFileObject>
+* Civet now gives "file not found" notice when run from command line if the target file is not found.
+* Changed random function to be persistent across commands (to prevent re-instantiation of random object creating similar values)
+* Changed random to include upper bound in random range (i.e. random 1 100 may now return 100)
+* Kernel now throws Unknown Command error (0x01) when encountering an unknown command
+* Fixed program immediately exiting when no file is specified (e.g. is civet.exe is ran directly), to present HELP information.
+
+
+>>> v0.1.1a2 - 12/11/2022
+* Fixed program immediately exiting on error, resulting in programs not run from command line not showing the error.
+
+
+>>> v1.1.1a1 - 12/11/2022
++ Initial Release
++ Added commands: end, goto, print, println, newvar, setvar, math, mathEngine, read, random
++ Added if command enabling Equal, Greater than, Less than, Not equal and 'Approximately Equal' (round numbers first) comparisons (=, >, <, !=, ~=)
++ Conditional statements support AND, OR, XOR (&&, ||, x|)
++ Added support for using variables as input parameters to lines of code.
++ Added support for using lines of code as input parameters to variables or other lines of code.
++ Added logical left-to-right math engine, for processing plain-text input strings (+-*/)

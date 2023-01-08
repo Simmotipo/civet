@@ -1,0 +1,12 @@
+var port create
+print Specify HTTP Port:
+var port set |+read+|
+println Starting HTTP Server on port ¬port¬
+http ¬port¬ start
+println Started!
+read
+http ¬port¬ stop
+println Stopped!
+println Press enter to exit...
+read
+goto 1

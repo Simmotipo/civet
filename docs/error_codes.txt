@@ -1,0 +1,39 @@
+0x00 Generic Kernel Error
+0x01 Unknown Command (Syntax Error?)
+0x02 Unimplemented Command (Not yet implemented)
+0x03 Requested goto point not defined
+0x04 Error parsing conditionals (Syntax Error?)
+0x05 Unknown SysVar toggle
+0x06 Generic StringUtils error
+0x07 StringUtils.Replace Error
+0x08 fileObject.fileNotFound
+0x09 fileObject.fileObjectNotFound
+0x0A fileObject.fileObjectAlreadyExists
+0x0B fileObject.generic
+0x0C fileObject.objectDoesNotExist
+0x0D Unknown File Manager command
+
+0xA0 Generic Variable Error
+0xA1 Attempted to create variable, but variable already exists with that name
+0xA2 Requested variable does not exist
+0xA3 Unknown error initialising variable.
+0xA4 Attempted to numerise innumerable variable
+0xA5 Unknown error disposing variable
+0xA6 Invalid variable name
+0xA7 Unknown variable command
+0xA8 Index outside bounds of array
+0xA9 Value not found
+
+0xB0 Generic HttpServer Error
+0xB1 Server already open on specified port
+0xB2 Server does not exist on specified port
+0xB3 Failed to initialise server on specified port
+0xB4 Server Path Already Registered
+0xB5 Failed to dispose server on specified port
+0xB7 Unknown Server Command
+ 
+
+0xFC Divide by zero exception
+0xFD Unhandled math error
+0xFE Invalid math operation requested
+0xFF Math function not yet implemented

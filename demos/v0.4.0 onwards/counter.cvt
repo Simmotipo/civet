@@ -1,0 +1,3 @@
+newVar counter |+ simpleReadFile C:\Users\simmo\source\repos\civet\civet\bin\Debug\net7.0\releases\demoProjects\v0.4.0`_onwards\number.txt +|
+setVar counter |+ math ¬counter¬ + 1 +|
+simpleWriteFile C:\Users\simmo\source\repos\civet\civet\bin\Debug\net7.0\releases\demoProjects\v0.4.0`_onwards\number.txt ¬counter¬

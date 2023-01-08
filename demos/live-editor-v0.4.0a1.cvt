@@ -1,0 +1,4 @@
+sysConfig breakOnError false
+print > 
+|+read+|
+goto 1

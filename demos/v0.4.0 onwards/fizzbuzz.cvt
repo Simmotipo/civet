@@ -1,0 +1,26 @@
+var number create 0
+
+>point
+var number set |+ math ¬number¬ + 1 +|
+if ¬number¬ = 101 >end
+if |+ math ¬number¬ % 3 +| = 0 && |+ math ¬number¬ % 5 +| = 0 >fizzbuzz
+if |+ math ¬number¬ % 3 +| = 0 >fizz
+if |+ math ¬number¬ % 5 +| = 0 >buzz
+println ¬number¬
+goto >point
+
+>fizzbuzz
+println fizzbuzz
+goto >point
+
+>fizz
+println fizz
+goto >point
+
+>buzz
+println buzz
+goto >point
+
+>end
+read
+end

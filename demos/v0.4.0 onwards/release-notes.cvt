@@ -1,0 +1,2 @@
+println |+ simpleReadFile C:\Users\simmo\source\repos\civet\civet\bin\Debug\netcoreapp3.1\Change`_Notes.txt +|
+read
