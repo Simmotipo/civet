@@ -84,6 +84,7 @@ udp <port> onMessage <function> <varName> -- will run on receipt of UDP packet.M
 File ReadByte as int
 HTTP Server
 Create and Delete folders
+Sleep
 
 ]] Planned v0.5
 Load functions / Flag Points (>flagName) from other files, for multi-file programs.
