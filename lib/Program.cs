@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 
 
-//Welcome to Civet v0.4.0a1
+//Welcome to Civet v0.4.1a1
 //A programming language by Oliver Simpson
-//(c) Nov 12 2022.
+//(c) Jan 13 2023.
 
 namespace civet
 {
@@ -214,6 +214,15 @@ namespace civet
                     case "println":
                         workingMem = "";
                         Console.WriteLine(line[8..]);
+                        break;
+                    case "sleep":
+                        System.Threading.Thread.Sleep(Convert.ToInt32(line[6..]));
+                        break;
+                    case "pause":
+                        System.Threading.Thread.Sleep(Convert.ToInt32(line[6..]));
+                        break;
+                    case "wait":
+                        System.Threading.Thread.Sleep(Convert.ToInt32(line[5..]));
                         break;
                     case "newvar":
                         workingMem = "";
