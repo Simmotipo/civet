@@ -1,0 +1,5 @@
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.csproj.AssemblyReference.cache
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.AssemblyInfoInputs.cache
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.AssemblyInfo.cs
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.csproj.CoreCompileInputs.cache
