@@ -5,7 +5,7 @@ using System.IO;
 
 //Welcome to Civet v0.4.1a1
 //A programming language by Oliver Simpson
-//(c) Feb 04 2023.
+//(c) Feb 05 2023.
 
 namespace civet
 {
@@ -18,7 +18,8 @@ namespace civet
         public static int index = 0;
         public static string filePath = "";
         public static string workingMem = "";
-        public static string version = "v0.4.0a1";
+        public static string version = "v0.4.1a1";
+        public static string copyright = "(c) 05-Feb-2023";
         public static string[] lines;
         public static string currentLine = "";
 
@@ -81,7 +82,7 @@ namespace civet
             for (int i = 0; i < $"Civet {version}".Length; i++) Console.Write('#'); Console.Write("\n");
             Console.WriteLine($"Civet {version}");
             Console.WriteLine("By Oliver Simpson");
-            Console.WriteLine("(c) 12-Nov-2022");
+            Console.WriteLine($"{copyright}");
             for (int i = 0; i < $"Civet {version}".Length; i++) Console.Write('#'); Console.Write("\n");
             Console.WriteLine("civet path/to/file variable=value");
             Console.WriteLine("Variables:\ndebug - true/false\nbreakOnError - true/false\nprintErrors - true/false");
