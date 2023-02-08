@@ -9,16 +9,13 @@ Key:
   * Bug fix / change
   ]] Planned, not yet implemented to version branch.
 
->>> v0.4.2 - XX/XX/XXXX
-]] + Added ability to re
-
 >>> v0.4.1a1 - XX/XX/XXXX
 ]] + Added HTTP server commands (http <port> <register/importConfig/exportConfig> <...> commands
-]] + Added ability to create, rename and delete folders
++ Added ability to create, rename and delete folders
 ]] + Added ability to ReadByte from file as Integer
-]] + Added "ReadOnly" command-line flag to prevent modification to parent system (Prevents creation, editing and deletion of Files in File System.)
-]] + Added programmatic behaviour for ReadOnly flag. Enabling ReadOnly can be done programmatically (may help prevent program hijacking), but cannot be disabled programmatically.
-]] + Added Sleep command
++ Added "ReadOnly" command-line flag to prevent modification to parent system (Prevents creation, editing and deletion of Files in File System.)
++ Added programmatic behaviour for ReadOnly flag. Enabling ReadOnly can be done programmatically (may help prevent program hijacking), but cannot be disabled programmatically.
++ Added Sleep command
 
 >>> v0.4.0a1 - 27/11/2022
 + Added HTTP server (http <port> <start/stop> commands

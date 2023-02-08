@@ -14,12 +14,13 @@ namespace civet
         public static bool debugMode = false;
         public static bool breakOnError = true;
         public static bool printErrors = true;
+        public static bool readOnlyFS = false;
 
         public static int index = 0;
         public static string filePath = "";
         public static string workingMem = "";
-        public static string version = "v0.4.1a1";
-        public static string copyright = "(c) 05-Feb-2023";
+        public static string version = "v0.4.1a3";
+        public static string copyright = "(c) 08-Feb-2023";
         public static string[] lines;
         public static string currentLine = "";
 
@@ -266,17 +267,21 @@ namespace civet
                         workingMem = Console.ReadLine();
                         break;
                     case "mkdir":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
                         if (debugMode) Console.WriteLine($"mkdir {line[6..]}");
                         if (!Directory.Exists(line[6..])) Directory.CreateDirectory(line[6..]);
                         else FileErrors.FileObjectAlreadyExists(line[6..]);
                         break;
                     case "rmdir":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
                         if (debugMode) Console.WriteLine($"rmdir {line[6..]}");
                         if (!Directory.Exists(line[6..])) FileErrors.ObjectDoesNotExist(line[6..]);
                         else if (Directory.GetFiles(line[6..]).Length + Directory.GetDirectories(line[6..]).Length == 0) Directory.Delete(line[6..]);
                         else FileErrors.DirectoryNotEmpty(line[6..]);
                         break;
+                    case "mvdir":
                     case "rndir":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
                         string oldPath = "";
                         bool firstHadQuotes = false;
                         string newPath = "";
@@ -306,8 +311,6 @@ namespace civet
                         else if (Directory.Exists(newPath)) FileErrors.FileObjectAlreadyExists(newPath, $"MV {oldPath} > {newPath}");
                         else FileErrors.FileObjectNotFound(oldPath, $"MV {oldPath} > {newPath}");
                         break;
-
-
                     case "random":
                         return Convert.ToString(sysRand.Next(Convert.ToInt32(line.Split(' ')[1]), Convert.ToInt32(line.Split(' ')[2]) + 1));
                     case "simplereadfile":
@@ -322,6 +325,7 @@ namespace civet
                         else FileErrors.FileNotFound(line[15..]);
                         break;
                     case "simplewritefile":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
                         string simpleWritePath = line.Split(' ')[1];
                         simpleWritePath = simpleWritePath.Replace("`_", " "); //(add ability to encapsulate inputs in quotemarks instead)
                         if (debugMode) Console.WriteLine($"Writing to {simpleWritePath}");
@@ -344,20 +348,27 @@ namespace civet
                         break;
                     case "sysconfig":
                         workingMem = line.Split(' ')[2].ToLower();
+                        bool val = false;
+                        if (workingMem.ToLower() == "true") val = true;
+
                         switch (line.Split(' ')[1].ToLower())
                         {
                             case "debug":
-                                if (line.Split(' ')[2].ToLower() == "true") debugMode = true;
+                                if (val) debugMode = true;
                                 else debugMode = false;
                                 break;
                             case "breakonerror":
-                                if (line.Split(' ')[2].ToLower() == "true") breakOnError = true;
+                                if (val) breakOnError = true;
                                 else breakOnError = false;
                                 break;
                             case "printerrors":
-                                if (line.Split(' ')[2].ToLower() == "true") printErrors = true;
+                                if (val) printErrors = true;
                                 else printErrors = false;
                                 break;
+                            case "readonlyfs":
+                            case "readonly":
+                                if (val) readOnlyFS = true;
+                                else KernelErrors.InvalidSysVarSet();
                             default:
                                 KernelErrors.UnknownSysVar();
                                 break;

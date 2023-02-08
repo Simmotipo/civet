@@ -98,6 +98,16 @@ namespace civet
             }
         }
 
+        public static void ReadOnlyFS(string details)
+        {
+            Console.WriteLine($"ERROR 0x10: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Write operation requested in read-only program.\n] {details}");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
         public static void UnknownFileManagerInstruction(string input)
         {
             Console.WriteLine($"ERROR 0x0F: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Unknown File Manager command {input}.");
@@ -328,6 +338,16 @@ namespace civet
         public static void UnknownSysVar()
         {
             if (Program.printErrors) Console.WriteLine($"ERROR 0x05: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Unknown SysVar Toggle.");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
+        public static void InvalidSysVarSet()
+        {
+            if (Program.printErrors) Console.WriteLine($"ERROR 0x11: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Invalid set operation on Sys Var.");
             if (Program.breakOnError)
             {
                 Console.ReadKey();
