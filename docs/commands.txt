@@ -86,10 +86,11 @@ udp <port> onMessage <function> <varName> -- will run on receipt of UDP packet.M
 --- Features Coming Soon:
 
 ]] Planned v0.4
-File ReadByte as int
+Bidirectional ASCII - Byte conversion
 HTTP Server
 
 ]] Planned v0.5
+Bidirectional conversion between Strings and Char arrays
 Load functions / Flag Points (>flagName) from other files, for multi-file programs.
 Run other CIVET files
 Run other EXE files
