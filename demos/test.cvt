@@ -1,9 +1,0 @@
-file test filePath C:\Users\simmo\source\repos\Simmotipo\civet\demos\t.txt
-file test readBytes chars char
-file test readBytes hexes hex
-file test readBytes ints int
-
-print |+ array chars get 0 +|
-print |+ array hexes get 0 +|
-print |+ array ints get 0 +| 
-read
