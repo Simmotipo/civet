@@ -20,6 +20,7 @@ file <fileObjectName> deleteFile
 file <fileObjectName> deleteFileObject
 file <fileObjectName> filePath <filePath> -- Assigns <filePath> to <fileObjectName>. Contents of file at <filePath> are loaded on an ad-hoc bases whenever <fileObjectName> is used.
 file <fileObjectName> moveTo <filePath>
+file <fileObjectName> readBytes <arrayName> <format> -- Reads contents of <fileObjectName> to an array named <arrayName>. Array values are in the format of <format>. Valid options are int, char and hex.
 file <fileObjectName> readText
 file <fileObjectName> readTextLine <index>
 file <fileObjectName> renameFile <newFileName>

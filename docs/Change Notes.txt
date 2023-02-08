@@ -9,10 +9,15 @@ Key:
   * Bug fix / change
   ]] Planned, not yet implemented to version branch.
 
->>> v0.4.1a1 - XX/XX/XXXX
+>>> v0.4.2a1 - XX/XX/XXXX
 ]] + Added HTTP server commands (http <port> <register/importConfig/exportConfig> <...> commands
+
+>>> v0.4.1b1 - 08/02/2023
+* Fixed static array values list causing all arrays to read/write from shared list
+
+>>> v0.4.1a1 - 08/02/2023
 + Added ability to create, rename and delete folders
-]] + Added ability to ReadByte from file as Integer
++ Added ability to ReadBytes from file to Integer arrays, Char arrays and Hex-String arrays
 + Added "ReadOnly" command-line flag to prevent modification to parent system (Prevents creation, editing and deletion of Files in File System.)
 + Added programmatic behaviour for ReadOnly flag. Enabling ReadOnly can be done programmatically (may help prevent program hijacking), but cannot be disabled programmatically.
 + Added Sleep command

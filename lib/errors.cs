@@ -98,7 +98,7 @@ namespace civet
             }
         }
 
-        public static void ReadOnlyFS(string details)
+        public static void ReadOnlyFS(string details = "")
         {
             Console.WriteLine($"ERROR 0x10: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Write operation requested in read-only program.\n] {details}");
             if (Program.breakOnError)

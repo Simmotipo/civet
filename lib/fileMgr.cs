@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 
 namespace civet
@@ -20,6 +21,7 @@ namespace civet
             string name = cmd.Split(' ')[0];
             string keyword = cmd.Split(' ')[1].ToLower();
 
+            if (keyword != "filepath" && !fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
             switch (keyword)
             {
                 case "filepath":
@@ -33,7 +35,6 @@ namespace civet
                     files.Add(f);
                     break;
                 case "deletefileobject":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++)
                     {
                         if (fileObjects[i] == name)
@@ -44,7 +45,6 @@ namespace civet
                     }
                     break;
                 case "renamefileobject":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++)
                     {
                         if (fileObjects[i] == name)
@@ -53,39 +53,43 @@ namespace civet
                         }
                     }
                     break;
-                case "readtext":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
+                case "readtext": //Update these to use List<FileObject>.GetIndex()
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) return files[i].ReadText();
                     FileErrors.Generic(name);
                     break;
                 case "readtextline":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) return files[i].ReadTextLine(Convert.ToInt32(cmd.Split(' ')[^1]));
                     FileErrors.Generic(name);
                     break;
                 case "deletefile":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].DeleteFile();
                     break;
                 case "writetext":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].WriteText(cmd[(name.Length + 1 + keyword.Length + 1)..]);
                     break;
                 case "appendtext":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].AppendText(cmd[(name.Length + 1 + keyword.Length + 1)..]);
                     break;
                 case "copyto":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].CopyTo(cmd[(name.Length + 1 + keyword.Length + 1)..]);
                     break;
                 case "moveto":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].MoveTo(cmd[(name.Length + 1 + keyword.Length + 1)..]);
                     break;
                 case "renamefile":
-                    if (!fileObjects.Contains(name)) { FileErrors.ObjectDoesNotExist(name); return ""; }
                     for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].Rename(cmd[(name.Length + 1 + keyword.Length + 1)..]);
+                    break;
+                case "readbytesasint":
+                    for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].ReadBytesToArray(cmd.Split(' ')[2], "int");
+                    break;
+                case "readbytesashex":
+                    for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].ReadBytesToArray(cmd.Split(' ')[2], "hex");
+                    break;
+                case "readbytesaschar":
+                    for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].ReadBytesToArray(cmd.Split(' ')[2], "char");
+                    break;
+                case "readbytes":
+                    for (int i = 0; i < fileObjects.Count; i++) if (fileObjects[i] == name) files[i].ReadBytesToArray(cmd.Split(' ')[2], cmd.Split(' ')[3]);
                     break;
                 default:
                     FileErrors.UnknownFileManagerInstruction(keyword);
@@ -100,6 +104,38 @@ namespace civet
     {
         public string fPath = "";
         public string name = "";
+
+        public void ReadBytesToArray(string arrayName, string format)
+        {
+            byte[] bytes = File.ReadAllBytes(fPath);
+            if (format == "int")
+            {
+                int[] ints = new int[bytes.Length];
+                for (int i = 0; i < bytes.Length; i++) ints[i] = Convert.ToInt32(bytes[i]);
+                ArrayMan.ArrayMgr($"{arrayName} create");
+                for (int i = 0; i < ints.Length; i++) ArrayMan.ArrayMgr($"{arrayName} add {ints[i]}");
+            }
+            else if (format == "char")
+            {
+                char[] chars = new char[bytes.Length];
+                for (int i = 0; i < bytes.Length; i++) chars[i] = (char)bytes[i];
+                ArrayMan.ArrayMgr($"{arrayName} create");
+                for (int i = 0; i < chars.Length; i++) ArrayMan.ArrayMgr($"{arrayName} add {chars[i]}");
+            }
+            else if (format == "hex")
+            {
+                string[] hexes = new string[bytes.Length];
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    byte[] tHex = new byte[1];
+                    tHex[0] = bytes[i];
+                    hexes[i] = Convert.ToHexString(tHex);
+                }
+                ArrayMan.ArrayMgr($"{arrayName} create");
+                for (int i = 0; i < hexes.Length; i++) ArrayMan.ArrayMgr($"{arrayName} add {hexes[i]}");
+            }
+
+        }
 
         public void Rename(string newName)
         {
