@@ -9,6 +9,9 @@ Key:
   * Bug fix / change
   ]] Planned, not yet implemented to version branch.
 
+>>> v0.4.2 - XX/XX/XXXX
+]] + Added ability to re
+
 >>> v0.4.1a1 - XX/XX/XXXX
 ]] + Added HTTP server commands (http <port> <register/importConfig/exportConfig> <...> commands
 ]] + Added ability to create, rename and delete folders

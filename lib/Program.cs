@@ -265,6 +265,49 @@ namespace civet
                     case "read":
                         workingMem = Console.ReadLine();
                         break;
+                    case "mkdir":
+                        if (debugMode) Console.WriteLine($"mkdir {line[6..]}");
+                        if (!Directory.Exists(line[6..])) Directory.CreateDirectory(line[6..]);
+                        else FileErrors.FileObjectAlreadyExists(line[6..]);
+                        break;
+                    case "rmdir":
+                        if (debugMode) Console.WriteLine($"rmdir {line[6..]}");
+                        if (!Directory.Exists(line[6..])) FileErrors.ObjectDoesNotExist(line[6..]);
+                        else if (Directory.GetFiles(line[6..]).Length + Directory.GetDirectories(line[6..]).Length == 0) Directory.Delete(line[6..]);
+                        else FileErrors.DirectoryNotEmpty(line[6..]);
+                        break;
+                    case "rndir":
+                        string oldPath = "";
+                        bool firstHadQuotes = false;
+                        string newPath = "";
+                        if (!line.Split(' ')[1].StartsWith(' ')) oldPath = line.Split(' ')[1];
+                        else
+                        {
+                            firstHadQuotes = true;
+                            int n = 7;
+                            while (line[n] != '\"')
+                            {
+                                oldPath += line[n];
+                                n++;
+                            }
+                        }
+                        if (!firstHadQuotes)
+                        {
+                            if (!line.Split(' ')[2].StartsWith(" ")) newPath = line.Split(" ")[2];
+                            else
+                            {
+                                FileErrors.NotYetImplemented("It is not yet supported for the second path in RNDIR commands to be quote-encapsulated");
+                                break;
+                            }
+                        }
+                        else { FileErrors.NotYetImplemented("It is not yet supported for the first path in RNDIR commands to be quote-encapsulated"); break; }
+
+                        if (Directory.Exists(oldPath) && !Directory.Exists(newPath)) Directory.Move(oldPath, newPath);
+                        else if (Directory.Exists(newPath)) FileErrors.FileObjectAlreadyExists(newPath, $"MV {oldPath} > {newPath}");
+                        else FileErrors.FileObjectNotFound(oldPath, $"MV {oldPath} > {newPath}");
+                        break;
+
+
                     case "random":
                         return Convert.ToString(sysRand.Next(Convert.ToInt32(line.Split(' ')[1]), Convert.ToInt32(line.Split(' ')[2]) + 1));
                     case "simplereadfile":

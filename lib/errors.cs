@@ -50,9 +50,9 @@ namespace civet
                 Environment.Exit(0);
             }
         }
-        public static void FileObjectAlreadyExists(string name)
+        public static void FileObjectAlreadyExists(string name, string details = "")
         {
-            Console.WriteLine($"ERROR 0x0A: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] fileObject already exists with the name {name}.");
+            Console.WriteLine($"ERROR 0x0A: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] fileObject already exists with the name {name}.\n] {details}");
             if (Program.breakOnError)
             {
                 Console.ReadKey();
@@ -78,9 +78,29 @@ namespace civet
             }
         }
 
+        public static void DirectoryNotEmpty(string name, string details = "")
+        {
+            Console.WriteLine($"ERROR 0x0D: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Requested delete directory {name} is not empty.\n] {details}");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
+        public static void NotYetImplemented(string details)
+        {
+            Console.WriteLine($"ERROR 0x0E: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Requested operation is recognised but not yet implemented.\n] {details}");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
         public static void UnknownFileManagerInstruction(string input)
         {
-            Console.WriteLine($"ERROR 0x0D: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Unknown File Manager command {input}.");
+            Console.WriteLine($"ERROR 0x0F: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Unknown File Manager command {input}.");
             if (Program.breakOnError)
             {
                 Console.ReadKey();
