@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 
-//Welcome to Civet v0.4.1b1
+//Welcome to Civet v0.4.2a1
 //A programming language by Oliver Simpson
 //(c) Feb 08 2023.
 
@@ -19,7 +19,7 @@ namespace civet
         public static int index = 0;
         public static string filePath = "";
         public static string workingMem = "";
-        public static string version = "v0.4.1b1";
+        public static string version = "v0.4.2a1";
         public static string copyright = "(c) 08-Feb-2023";
         public static string[] lines;
         public static string currentLine = "";
