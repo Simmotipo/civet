@@ -18,13 +18,11 @@ namespace civet
             string name = cmd.Split(' ')[0];
             string keyword = cmd.Split(' ')[1].ToLower();
 
-            //string value = "";
-
             switch (keyword)
             {
                 case "create":
                     if (arrayNames.Contains(name)) { VarErrors.VariableAlreadyExists(name); return ""; }
-                    else { 
+                    else {
                         arrayNames.Add(name);
                         Array a = new Array
                         {
@@ -152,7 +150,7 @@ namespace civet
 
     class Array
     {
-        static readonly List<Variable> values = new List<Variable>();
+        private readonly List<Variable> values = new List<Variable>();
         public string name = "";
 
         public void AddValue(string value, bool exclusive = false)

@@ -20,6 +20,7 @@ file <fileObjectName> deleteFile
 file <fileObjectName> deleteFileObject
 file <fileObjectName> filePath <filePath> -- Assigns <filePath> to <fileObjectName>. Contents of file at <filePath> are loaded on an ad-hoc bases whenever <fileObjectName> is used.
 file <fileObjectName> moveTo <filePath>
+file <fileObjectName> readBytes <arrayName> <format> -- Reads contents of <fileObjectName> to an array named <arrayName>. Array values are in the format of <format>. Valid options are int, char and hex.
 file <fileObjectName> readText
 file <fileObjectName> readTextLine <index>
 file <fileObjectName> renameFile <newFileName>
@@ -32,14 +33,18 @@ http <port> start
 http <port> stop
 math <stringFunction> (Variables parsed by interpreter)
 mathEngine <stringFunction> (Variables parsed by mathEngine; all variables must be numerable)
+mkdir <path>
+mvdir <oldPath> <newPath>
 newVar <varName> <optionalValue>
 print <string> (quote-encapsulation not required)
 println <string> (quote-encapsulation not required)
 random <lowerBound> <upperBound>
 read
+rmdir <path>
 setVar varName newValue
 simpleReadFile <filePath> -- replace spaces in file path name with `_  !!)
 simpleWriteFile <filePath> <content> -- replace spaces in file path name with `_  !!
+sleep <millis>
 string "input" contains "comparator" -- returns 'true' or 'false'  as strings
 string "input" indexOf "searchTerm" -- returns index of first value, or -1.
 string "input" length
@@ -81,12 +86,11 @@ udp <port> onMessage <function> <varName> -- will run on receipt of UDP packet.M
 --- Features Coming Soon:
 
 ]] Planned v0.4
-File ReadByte as int
+Bidirectional ASCII - Byte conversion
 HTTP Server
-Create and Delete folders
-Sleep
 
 ]] Planned v0.5
+Bidirectional conversion between Strings and Char arrays
 Load functions / Flag Points (>flagName) from other files, for multi-file programs.
 Run other CIVET files
 Run other EXE files

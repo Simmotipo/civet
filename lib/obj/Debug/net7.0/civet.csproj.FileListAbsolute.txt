@@ -1,0 +1,15 @@
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.csproj.AssemblyReference.cache
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.AssemblyInfoInputs.cache
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.AssemblyInfo.cs
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.csproj.CoreCompileInputs.cache
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\bin\Debug\net7.0\civet.exe
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\bin\Debug\net7.0\civet.deps.json
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\bin\Debug\net7.0\civet.runtimeconfig.json
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\bin\Debug\net7.0\civet.dll
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\bin\Debug\net7.0\civet.pdb
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.dll
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\refint\civet.dll
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.pdb
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\civet.genruntimeconfig.cache
+C:\Users\simmo\Source\Repos\Simmotipo\civet\lib\obj\Debug\net7.0\ref\civet.dll

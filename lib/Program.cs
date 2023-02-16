@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 
 
-//Welcome to Civet v0.4.0a1
+//Welcome to Civet v0.4.1b1
 //A programming language by Oliver Simpson
-//(c) Nov 12 2022.
+//(c) Feb 08 2023.
 
 namespace civet
 {
@@ -14,11 +14,13 @@ namespace civet
         public static bool debugMode = false;
         public static bool breakOnError = true;
         public static bool printErrors = true;
+        public static bool readOnlyFS = false;
 
         public static int index = 0;
         public static string filePath = "";
         public static string workingMem = "";
-        public static string version = "v0.4.0a1";
+        public static string version = "v0.4.1b1";
+        public static string copyright = "(c) 08-Feb-2023";
         public static string[] lines;
         public static string currentLine = "";
 
@@ -81,7 +83,7 @@ namespace civet
             for (int i = 0; i < $"Civet {version}".Length; i++) Console.Write('#'); Console.Write("\n");
             Console.WriteLine($"Civet {version}");
             Console.WriteLine("By Oliver Simpson");
-            Console.WriteLine("(c) 12-Nov-2022");
+            Console.WriteLine($"{copyright}");
             for (int i = 0; i < $"Civet {version}".Length; i++) Console.Write('#'); Console.Write("\n");
             Console.WriteLine("civet path/to/file variable=value");
             Console.WriteLine("Variables:\ndebug - true/false\nbreakOnError - true/false\nprintErrors - true/false");
@@ -215,6 +217,15 @@ namespace civet
                         workingMem = "";
                         Console.WriteLine(line[8..]);
                         break;
+                    case "sleep":
+                        System.Threading.Thread.Sleep(Convert.ToInt32(line[6..]));
+                        break;
+                    case "pause":
+                        System.Threading.Thread.Sleep(Convert.ToInt32(line[6..]));
+                        break;
+                    case "wait":
+                        System.Threading.Thread.Sleep(Convert.ToInt32(line[5..]));
+                        break;
                     case "newvar":
                         workingMem = "";
                         if (line.Split(' ').Length == 2) VarMan.NewVar(line.Split(' ')[1], "");
@@ -255,6 +266,51 @@ namespace civet
                     case "read":
                         workingMem = Console.ReadLine();
                         break;
+                    case "mkdir":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
+                        if (debugMode) Console.WriteLine($"mkdir {line[6..]}");
+                        if (!Directory.Exists(line[6..])) Directory.CreateDirectory(line[6..]);
+                        else FileErrors.FileObjectAlreadyExists(line[6..]);
+                        break;
+                    case "rmdir":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
+                        if (debugMode) Console.WriteLine($"rmdir {line[6..]}");
+                        if (!Directory.Exists(line[6..])) FileErrors.ObjectDoesNotExist(line[6..]);
+                        else if (Directory.GetFiles(line[6..]).Length + Directory.GetDirectories(line[6..]).Length == 0) Directory.Delete(line[6..]);
+                        else FileErrors.DirectoryNotEmpty(line[6..]);
+                        break;
+                    case "mvdir":
+                    case "rndir":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
+                        string oldPath = "";
+                        bool firstHadQuotes = false;
+                        string newPath = "";
+                        if (!line.Split(' ')[1].StartsWith(' ')) oldPath = line.Split(' ')[1];
+                        else
+                        {
+                            firstHadQuotes = true;
+                            int n = 7;
+                            while (line[n] != '\"')
+                            {
+                                oldPath += line[n];
+                                n++;
+                            }
+                        }
+                        if (!firstHadQuotes)
+                        {
+                            if (!line.Split(' ')[2].StartsWith(" ")) newPath = line.Split(" ")[2];
+                            else
+                            {
+                                FileErrors.NotYetImplemented("It is not yet supported for the second path in RNDIR commands to be quote-encapsulated");
+                                break;
+                            }
+                        }
+                        else { FileErrors.NotYetImplemented("It is not yet supported for the first path in RNDIR commands to be quote-encapsulated"); break; }
+
+                        if (Directory.Exists(oldPath) && !Directory.Exists(newPath)) Directory.Move(oldPath, newPath);
+                        else if (Directory.Exists(newPath)) FileErrors.FileObjectAlreadyExists(newPath, $"MV {oldPath} > {newPath}");
+                        else FileErrors.FileObjectNotFound(oldPath, $"MV {oldPath} > {newPath}");
+                        break;
                     case "random":
                         return Convert.ToString(sysRand.Next(Convert.ToInt32(line.Split(' ')[1]), Convert.ToInt32(line.Split(' ')[2]) + 1));
                     case "simplereadfile":
@@ -269,6 +325,7 @@ namespace civet
                         else FileErrors.FileNotFound(line[15..]);
                         break;
                     case "simplewritefile":
+                        if (readOnlyFS) { FileErrors.ReadOnlyFS(); break; }
                         string simpleWritePath = line.Split(' ')[1];
                         simpleWritePath = simpleWritePath.Replace("`_", " "); //(add ability to encapsulate inputs in quotemarks instead)
                         if (debugMode) Console.WriteLine($"Writing to {simpleWritePath}");
@@ -291,19 +348,27 @@ namespace civet
                         break;
                     case "sysconfig":
                         workingMem = line.Split(' ')[2].ToLower();
+                        bool val = false;
+                        if (workingMem.ToLower() == "true") val = true;
+
                         switch (line.Split(' ')[1].ToLower())
                         {
                             case "debug":
-                                if (line.Split(' ')[2].ToLower() == "true") debugMode = true;
+                                if (val) debugMode = true;
                                 else debugMode = false;
                                 break;
                             case "breakonerror":
-                                if (line.Split(' ')[2].ToLower() == "true") breakOnError = true;
+                                if (val) breakOnError = true;
                                 else breakOnError = false;
                                 break;
                             case "printerrors":
-                                if (line.Split(' ')[2].ToLower() == "true") printErrors = true;
+                                if (val) printErrors = true;
                                 else printErrors = false;
+                                break;
+                            case "readonlyfs":
+                            case "readonly":
+                                if (val) readOnlyFS = true;
+                                else KernelErrors.InvalidSysVarSet();
                                 break;
                             default:
                                 KernelErrors.UnknownSysVar();

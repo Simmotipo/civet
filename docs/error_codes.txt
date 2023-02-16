@@ -11,7 +11,11 @@
 0x0A fileObject.fileObjectAlreadyExists
 0x0B fileObject.generic
 0x0C fileObject.objectDoesNotExist
-0x0D Unknown File Manager command
+0x0D Directory is not empty
+0x0E FileManager NotYetImplemented error
+0x0F Unknown File Manager command
+0x10 Attempt to write to read-only file system
+0x11 Disallowed SysVar set.
 
 0xA0 Generic Variable Error
 0xA1 Attempted to create variable, but variable already exists with that name
