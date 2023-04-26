@@ -223,6 +223,71 @@ namespace civet
     }
 
 
+    static class UdpErrors
+    {
+        public static void ServerAlreadyExists(string type, string name)
+        {
+            Console.WriteLine($"ERROR 0xB9: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Server of type {type} already exists on port {name}.");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+        public static void ServerDoesntExist(string type, string name)
+        {
+            Console.WriteLine($"ERROR 0xBA: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] No server of type {type} exists on port {name}.");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
+        public static void ServerNotDisposed(string type, string name)
+        {
+            Console.WriteLine($"ERROR 0xBB: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Failed to dispose server of type {type} from port {name}.");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
+        public static void UnknownServerCommand(string keyword)
+        {
+            Console.WriteLine($"ERROR 0xBC: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Unknown Server command {keyword}.");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
+        public static void ErrorSendingTraffic(string details)
+        {
+            Console.WriteLine($"ERROR 0xBD: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Error sending UDP traffic. Details: {details}.");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+
+
+
+        public static void Generic(Exception e, string details = "")
+        {
+
+            Console.WriteLine($"ERROR 0xB8: Line {Program.index}\n] {File.ReadAllLines(Program.filePath)[Program.index]}\n] Generic HttpServer error. \n] {e}\n] Additional Details: {details}.");
+            if (Program.breakOnError)
+            {
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+        }
+    }
+
     static class HttpErrors
     {
         public static void ServerAlreadyExists(string type, string name)

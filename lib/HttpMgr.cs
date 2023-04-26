@@ -15,8 +15,8 @@ namespace civet
     class HttpMan
     {
 
-        static readonly List<HttpServer> servers = new List<HttpServer>();
-        static readonly List<string> ports = new List<string>();
+        static List<HttpServer> servers = new List<HttpServer>();
+        static List<string> ports = new List<string>();
         public static string Go(string cmd)
         {
             string port = cmd.Split(' ')[0];
@@ -45,7 +45,6 @@ namespace civet
                             bool disposed = servers[i].dispose();
                             if (disposed)
                             {
-                                servers[i].dispose();
                                 servers.RemoveAt(i);
                                 ports.RemoveAt(i);
                             }
@@ -54,7 +53,7 @@ namespace civet
                     }
                     break;
                 default:
-                    FileErrors.UnknownFileManagerInstruction(keyword);
+                    HttpErrors.UnknownServerCommand(keyword);
                     break;
             }
 
@@ -68,10 +67,10 @@ namespace civet
         public List<string> paths = new List<string>();
         public List<string> goPoints = new List<string>();
         public string port = "";
-        public static bool runServer = true;
-        static Thread serverThread;
+        public bool runServer = true;
+        Thread serverThread;
 
-        public static HttpListener listener;
+        public HttpListener listener;
         public static string url = $"";
         public static int pageViews = 0;
         public static int requestCount = 0;
@@ -120,7 +119,7 @@ namespace civet
             catch (Exception e) { HttpErrors.Generic(e, port); }
         }
 
-        public static async Task HandleIncomingConnections()
+        public async Task HandleIncomingConnections()
         {
 
             while (runServer)
@@ -188,7 +187,7 @@ namespace civet
             return true;
         }
 
-        public static HttpResponsePackage MainThreadHandleContentReceived(string path, string HttpMethod, string UserHostName, string UserAgent, string data)
+        public HttpResponsePackage MainThreadHandleContentReceived(string path, string HttpMethod, string UserHostName, string UserAgent, string data)
         {
             HttpResponsePackage r = new HttpResponsePackage();
 
@@ -197,11 +196,5 @@ namespace civet
 
             return r;
         }
-    }
-
-    class HttpResponsePackage
-    {
-        public byte[] data;
-        public string reponseType;
     }
 }

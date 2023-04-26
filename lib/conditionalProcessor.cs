@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,8 +7,33 @@ namespace civet
 {
     class Conditionals
     {
-        public static bool MultiProcess(string[] parts)
+        public static bool MultiProcess(string equation)
         {
+            string[] operands = { "&&", "||", "x|", "!|", "=", "!=", "~=", "<", ">" };
+
+            string[] parts = internalUtils.splitString(equation, operands, true);
+            for (int i = 0; i < parts.Length; i++)
+            {
+                if (parts[i].Contains("`"))
+                {
+                    parts[i] = internalUtils.trimWithin(parts[i], '`');
+
+                    //int x = 0;
+                    //while (x < parts[i].Length)
+                    //{
+                    //    if (parts[i][x] == '`')
+                    //    {
+                    //        int xx = 1;
+                    //        while (parts[i][x + xx] != '`') xx++;
+                    //        xx++;
+                    //        string varName = parts[i].Substring(x, xx);
+                    //        parts[i] = parts[i].Replace(varName, VarMan.GetVar(varName.Replace("`", "")));
+                    //    }
+                    //    x++;
+                    //}
+                }
+            }
+            if (Program.debugMode) foreach (string part in parts) { Console.WriteLine(part); }
 
             int cond = 0;
             string[] firstBits = { parts[cond], parts[cond + 1], parts[cond + 2] };

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 
-//Welcome to Civet v0.4.2a1
+//Welcome to Civet v0.5.0a1
 //A programming language by Oliver Simpson
 //(c) Feb 08 2023.
 
@@ -19,14 +20,20 @@ namespace civet
         public static int index = 0;
         public static string filePath = "";
         public static string workingMem = "";
-        public static string version = "v0.4.2a1";
-        public static string copyright = "(c) 08-Feb-2023";
+        public static string version = "v0.5.0a1";
+        public static string copyright = "(c) 26-Apr-2023";
         public static string[] lines;
         public static string currentLine = "";
 
         public static Random sysRand = new Random();
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
+        {
+            Program p = new Program();
+            p.Run(args);
+        }
+
+        void Run(string[] args)
         {
             if (args.Length == 0) PrintHelp(true);
             if (args.Length > 0)
@@ -92,7 +99,7 @@ namespace civet
             Environment.Exit(0);
         }
 
-        static void Interpreter()
+        void Interpreter()
         {
             index = 0;
             while (index < lines.Length)
@@ -102,7 +109,7 @@ namespace civet
             }
         }
 
-        static string Interpret(string line, bool subCmd = false)
+        public string Interpret(string line, bool subCmd = false)
         {
             try
             {
@@ -139,23 +146,23 @@ namespace civet
                     line = line.Replace(line.Substring(x, xx), Interpret(cmd, true));
                     //if (subCmd) return line;
                 }
-                while (line.Contains('¦'))
+                while (line.Contains('{'))
                 {
                     int x = 0;
 
-                    while (line[x] != '¦') x++;
+                    while (line[x] != '{') x++;
                     int subLevel = 1;
 
                     int xx = 1;
                     while (subLevel != 0)
                     {
-                        if (line[x + xx] == '+' && line[x + xx + 1] == '¦') subLevel--;
-                        else if (line[x + xx] == '¦' && line[x + xx + 1] == '+') subLevel++;
+                        if (line[x + xx] == '}') subLevel--;
+                        else if (line[x + xx] == '{') subLevel++;
                         xx++;
                     }
-                    xx++;
 
-                    string cmd = line.Substring(x + 2, xx - 4);
+                    if (debugMode) Console.WriteLine($"X={x},XX={xx}");
+                    string cmd = line.Substring(x + 1, xx - 2);
                     workingMem = "> subCmd generated - " + cmd;
                     if (debugMode) Console.WriteLine(workingMem);
                     line = line.Replace(line.Substring(x, xx), Interpret(cmd, true));
@@ -257,6 +264,9 @@ namespace civet
                     case "http":
                         workingMem = HttpMan.Go(line[5..]);
                         break;
+                    case "udp":
+                        workingMem = UdpMan.Go(line[4..]);
+                        break;
                     case "math":
                         workingMem = Convert.ToString(MathEngine.SimpleString(line.Replace("math ", "")));
                         break;
@@ -337,8 +347,12 @@ namespace civet
                     case "if":
                         string onTrue = line.Split(' ')[^1];
                         if (debugMode) Console.WriteLine($"Evaluating {line.Replace($" {onTrue}", "")[3..]}");
-                        string[] parts = line.Replace($" {onTrue}", "")[3..].Split(' ');
-                        bool result = Conditionals.MultiProcess(parts);
+
+                        string equation = line.Replace($" {onTrue}", "")[3..];
+
+
+                        //string[] parts = line.Replace($" {onTrue}", "")[3..].Split(' ');
+                        bool result = Conditionals.MultiProcess(equation);
                         if (result) Interpret($"goto {onTrue}");
                         break;
                     case "string":

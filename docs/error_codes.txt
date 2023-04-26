@@ -35,6 +35,13 @@
 0xB4 Server Path Already Registered
 0xB5 Failed to dispose server on specified port
 0xB7 Unknown Server Command
+
+0xB8 Generic UdpServer Error
+0xB9 Server already open on specified port
+0xBA Server does not exist of specified port
+0xBB Failed to dispose server on specified port
+0xBC Unknown ServerCommand
+0xBD Error sending UDP Traffic
  
 
 0xFC Divide by zero exception

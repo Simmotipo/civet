@@ -26,7 +26,7 @@ file <fileObjectName> readTextLine <index>
 file <fileObjectName> renameFile <newFileName>
 file <fileObjectName> renameFileObject <newFileObjectName>
 file <fileObjectName> writeText <content>
-if <val1> <condition> <val2> <optional: Combiner> etc.
+if <val1><condition><val2> <optional: Combiner> etc. [Note: "if a = a" will return false as comparing 'a ' to ' a'. Use "if `a` = `a`" for this! - i.e., encapsulate sides of comparator in ``]
 goto >flagName
 goto <lineNumber>
 http <port> start
@@ -54,6 +54,9 @@ string "input" reverse
 string "input" substring startIndex optionalLength
 string "input" uppercase
 sysconfig <debug/debugOnError/printErrors> <true/false>
+udp <port> bufferString -- Get ASCII Encoded content of most recent request buffer
+udp <port> start
+udp <port> stop
 var <varName> create <optionalValue>
 var <varName> delete
 var <varName> get -- equivalent of ¬varName¬
