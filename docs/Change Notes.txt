@@ -19,10 +19,11 @@ Key:
 + Added UDP Client
 + Send UDP data as string
 + Added error codes for UDP Server and Client
++ Added use of { and } for subcommands
 * Improved handling of spaces in conditionals. Note, this may break some existing setups. See commands
 * Fixed HttpErrors.UnknownServerCommand showing as FileErrors.UnknownFileManagerInstruction
 * Fixed disposal of HTTP server
-- Deprecated using broken bar (¦) for subcommands (¦+ and +¦
+- Deprecated using broken bar (¦) for subcommands (¦+ and +¦)
 
 
 >>> v0.4.1b1 - 08/02/2023
