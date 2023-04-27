@@ -15,7 +15,9 @@ Key:
 >>> v0.5.0a2 - 27/04/2023
 + Can now use {{ to include { in commands. E.g. "println {{read}}" will print "{read}"
 + Added readraw for reading raw input from CLI. Read now replaces any user-provded { and } with {{ and }}
++ Added ability for disabling { and } as signifiers of subcommands (via sysconfig parsebraces true/false)
 * Fixed UdpErrors.UnknownServerCommand showing as FileErrors.UnknownFileManagerCommand
+* "if a = b" should now be written "if a == b"
 
 >>> v0.5.0a1 - 26/04/2023
 + Added UDP Server

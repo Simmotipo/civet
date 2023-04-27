@@ -48,7 +48,7 @@ namespace civet
         }
 
 
-
+        //There's a bug here somewhere to do with {{ and }}
         public static string[] splitString(string str, string[] delimiters, bool keepDelimiters = false)
         {
             string[] workingList = new string[1];

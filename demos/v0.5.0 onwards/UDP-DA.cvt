@@ -1,29 +1,18 @@
-print Enter Listener Port:
-var port0 create {read}
+sysconfig parseBraces false
+udp 5000 start
 
-print Enter Output Port 1:
-var port1 create {read}
-
-print Enter Output Port 2:
-var port2 create {read}
-
-print Enter Target IP:
-var ip create {read}
-
-udp ¬port0¬ start
-
-println Now forwarding inbound traffic on ¬port0¬ to ¬ip¬ on ports ¬port1¬ and ¬port2¬
+println Now forwarding inbound traffic on 5000 to 10.12.3.201:514 and 10.12.3.202:514
 
 var data create NUL
 var lastData create NUL
 >waitForData
 sleep 100
-var data set { udp ¬port0¬ bufferString }
+var data set |+ udp ¬port0¬ bufferString +|
 if `¬data¬` = `NUL` >waitForData
 if `¬data¬` = `¬lastData¬` >waitForData
 println FWD: ¬data¬
-udp ¬ip¬:¬port1¬ send ¬data¬
-udp ¬ip¬:¬port2¬ send ¬data¬
+udp 10.12.3.201:514 send ¬data¬
+udp 10.12.3.202:514 send ¬data¬
 var lastData set ¬data¬
 var data set NUL
 goto >waitForData

@@ -53,6 +53,9 @@ namespace civet
                     case "contains":
                         if (str1.Contains(postStr1[9..])) return "true";
                         else return "false";
+                    case "startswith":
+                        if (str1.StartsWith(postStr1[11..])) return "true";
+                        else return "false";
                     case "indexof":
                         if (!str1.Contains(postStr1[8..])) return "-1";
                         else

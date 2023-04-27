@@ -39,7 +39,8 @@ newVar <varName> <optionalValue>
 print <string> (quote-encapsulation not required)
 println <string> (quote-encapsulation not required)
 random <lowerBound> <upperBound>
-read
+read - Will replace { with {{ if parsebraces is true
+readraw
 rmdir <path>
 setVar varName newValue
 simpleReadFile <filePath> -- replace spaces in file path name with `_  !!)

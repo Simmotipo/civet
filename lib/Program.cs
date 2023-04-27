@@ -16,6 +16,7 @@ namespace civet
         public static bool breakOnError = true;
         public static bool printErrors = true;
         public static bool readOnlyFS = false;
+        public static bool parseBraces = false;
 
         public static int index = 0;
         public static string filePath = "";
@@ -146,7 +147,7 @@ namespace civet
                     line = line.Replace(line.Substring(x, xx), Interpret(cmd, true));
                     //if (subCmd) return line;
                 }
-                while (line.Replace("{{", "@").Contains('{'))
+                while (line.Replace("{{", "@").Contains('{') && parseBraces)
                 {
                     int x = 0;
 
@@ -274,7 +275,8 @@ namespace civet
                         workingMem = Convert.ToString(MathEngine.SimpleString(line.Replace("MathEngine ", ""), false));
                         break;
                     case "read":
-                        workingMem = Console.ReadLine().Replace("{", "{{").Replace("}", "}}");
+                        if (parseBraces) workingMem = Console.ReadLine().Replace("{", "{{").Replace("}", "}}");
+                        else workingMem = Console.ReadLine();
                         break;
                     case "readraw":
                         workingMem = Console.ReadLine();
@@ -351,7 +353,9 @@ namespace civet
                         string onTrue = line.Split(' ')[^1];
                         if (debugMode) Console.WriteLine($"Evaluating {line.Replace($" {onTrue}", "")[3..]}");
 
+
                         string equation = line.Replace($" {onTrue}", "")[3..];
+                        if (parseBraces) equation = equation.Replace("{{", "{").Replace("}}", "}");
 
 
                         //string[] parts = line.Replace($" {onTrue}", "")[3..].Split(' ');
@@ -386,6 +390,10 @@ namespace civet
                             case "readonly":
                                 if (val) readOnlyFS = true;
                                 else KernelErrors.InvalidSysVarSet();
+                                break;
+                            case "parsebraces":
+                                if (val) parseBraces = true;
+                                else parseBraces = false;
                                 break;
                             default:
                                 KernelErrors.UnknownSysVar();

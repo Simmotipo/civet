@@ -213,7 +213,7 @@ namespace civet
                 UDPSocket c = new UDPSocket();
 
                 c.Client(target.Split(':')[0], Convert.ToInt32(target.Split(':')[1]), true);
-                c.Send(message.Replace("{{", "{").Replace("}}", "}"));
+                c.Send(message);
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace civet
         {
             byte[] buffer = serverSocket.getCurrentBuffer();
             if (buffer == null) return "NUL";
-            else return ASCIIEncoding.ASCII.GetString(buffer).Replace("{", "{{").Replace("}", "}}");
+            else return ASCIIEncoding.ASCII.GetString(buffer);
         }
 
     }
