@@ -17,7 +17,7 @@ Key:
 + Added readraw for reading raw input from CLI. Read now replaces any user-provded { and } with {{ and }}
 + Added ability for disabling { and } as signifiers of subcommands (via sysconfig parsebraces true/false)
 * Fixed UdpErrors.UnknownServerCommand showing as FileErrors.UnknownFileManagerCommand
-* "if a = b" should now be written "if a == b"
+* "if a = b" should now be written "if a == b", likewise a < b and a > b are << and >>
 
 >>> v0.5.0a1 - 26/04/2023
 + Added UDP Server

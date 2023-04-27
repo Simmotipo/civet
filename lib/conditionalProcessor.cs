@@ -9,7 +9,7 @@ namespace civet
     {
         public static bool MultiProcess(string equation)
         {
-            string[] operands = { "&&", "||", "x|", "!|", "==", "!=", "~=", "<", ">" };
+            string[] operands = { "&&", "||", "x|", "!|", "==", "!=", "~=", "<<", ">>" };
 
             string[] parts = internalUtils.splitString(equation, operands, true);
             for (int i = 0; i < parts.Length; i++)
@@ -88,12 +88,12 @@ namespace civet
                     if (parts[0] != parts[2]) result = true;
                     else result = false;
                 }
-                else if (parts[1] == ">")
+                else if (parts[1] == ">>")
                 {
                     if (Convert.ToInt32(parts[0]) > Convert.ToInt32(parts[2])) result = true;
                     else result = false;
                 }
-                else if (parts[1] == "<")
+                else if (parts[1] == "<<")
                 {
                     if (Convert.ToInt32(parts[0]) > Convert.ToInt32(parts[2])) result = true;
                     else result = false;

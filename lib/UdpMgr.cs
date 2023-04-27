@@ -91,7 +91,7 @@ namespace civet
         class UDPSocket
         {
             private Socket _socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            private const int bufSize = 8 * 1024;
+            private const int bufSize = 16 * 1024; //Note to self: I just doubled 8 -> 16. Just in case this causes unexpected issues
             private State state = new State();
             private EndPoint epFrom = new IPEndPoint(IPAddress.Any, 0);
             private AsyncCallback recv = null;

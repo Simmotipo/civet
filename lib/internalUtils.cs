@@ -80,6 +80,7 @@ namespace civet
 
         public static string trimWithin(string str, char delimiter)
         {
+            if (Program.debugMode) Console.WriteLine($"Delimiting by {delimiter} of \"{str}\"");
             string s = "";
             int i = 0;
             while (str[i] != delimiter) { i++; }
