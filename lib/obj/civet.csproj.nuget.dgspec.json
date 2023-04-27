@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\simmo\\Source\\Repos\\Simmotipo\\civet\\lib\\civet.csproj": {}
+    "C:\\Users\\oliver simpson\\source\\repos\\Simmotipo\\civet\\lib\\civet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\simmo\\Source\\Repos\\Simmotipo\\civet\\lib\\civet.csproj": {
+    "C:\\Users\\oliver simpson\\source\\repos\\Simmotipo\\civet\\lib\\civet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\simmo\\Source\\Repos\\Simmotipo\\civet\\lib\\civet.csproj",
+        "projectUniqueName": "C:\\Users\\oliver simpson\\source\\repos\\Simmotipo\\civet\\lib\\civet.csproj",
         "projectName": "civet",
-        "projectPath": "C:\\Users\\simmo\\Source\\Repos\\Simmotipo\\civet\\lib\\civet.csproj",
-        "packagesPath": "C:\\Users\\simmo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\simmo\\Source\\Repos\\Simmotipo\\civet\\lib\\obj\\",
+        "projectPath": "C:\\Users\\oliver simpson\\source\\repos\\Simmotipo\\civet\\lib\\civet.csproj",
+        "packagesPath": "C:\\Users\\oliver simpson\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\oliver simpson\\source\\repos\\Simmotipo\\civet\\lib\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\simmo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\oliver simpson\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -60,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

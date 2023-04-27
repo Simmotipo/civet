@@ -4,9 +4,9 @@ using System.IO;
 using System.Runtime.CompilerServices;
 
 
-//Welcome to Civet v0.5.0a1
+//Welcome to Civet v0.5.0a2
 //A programming language by Oliver Simpson
-//(c) Feb 08 2023.
+//(c) Apr 27 2023.
 
 namespace civet
 {
@@ -20,8 +20,8 @@ namespace civet
         public static int index = 0;
         public static string filePath = "";
         public static string workingMem = "";
-        public static string version = "v0.5.0a1";
-        public static string copyright = "(c) 26-Apr-2023";
+        public static string version = "v0.5.0a2";
+        public static string copyright = "(c) 27-Apr-2023";
         public static string[] lines;
         public static string currentLine = "";
 
@@ -146,7 +146,7 @@ namespace civet
                     line = line.Replace(line.Substring(x, xx), Interpret(cmd, true));
                     //if (subCmd) return line;
                 }
-                while (line.Contains('{'))
+                while (line.Replace("{{", "@").Contains('{'))
                 {
                     int x = 0;
 
@@ -156,8 +156,8 @@ namespace civet
                     int xx = 1;
                     while (subLevel != 0)
                     {
-                        if (line[x + xx] == '}') subLevel--;
-                        else if (line[x + xx] == '{') subLevel++;
+                        if (line[x + xx] == '}' && (x+xx+1 == line.Length || line[x + xx + 1] != '}')) subLevel--;
+                        else if (line[x + xx] == '{' && (x + xx + 1 == line.Length || line[x + xx + 1] != '}')) subLevel++;
                         xx++;
                     }
 
@@ -274,6 +274,9 @@ namespace civet
                         workingMem = Convert.ToString(MathEngine.SimpleString(line.Replace("MathEngine ", ""), false));
                         break;
                     case "read":
+                        workingMem = Console.ReadLine().Replace("{", "{{").Replace("}", "}}");
+                        break;
+                    case "readraw":
                         workingMem = Console.ReadLine();
                         break;
                     case "mkdir":

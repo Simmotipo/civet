@@ -75,7 +75,7 @@ namespace civet
                     }
                     break;
                 default:
-                    FileErrors.UnknownFileManagerInstruction(keyword);
+                    UdpErrors.UnknownServerCommand(keyword);
                     break;
             }
 
@@ -212,8 +212,8 @@ namespace civet
             {
                 UDPSocket c = new UDPSocket();
 
-                //c.Client(target.Split(':')[0], Convert.ToInt32(target.Split(':')[1]), true);
-                c.Send(message);
+                c.Client(target.Split(':')[0], Convert.ToInt32(target.Split(':')[1]), true);
+                c.Send(message.Replace("{{", "{").Replace("}}", "}"));
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace civet
         {
             byte[] buffer = serverSocket.getCurrentBuffer();
             if (buffer == null) return "NUL";
-            else return ASCIIEncoding.ASCII.GetString(buffer);
+            else return ASCIIEncoding.ASCII.GetString(buffer).Replace("{", "{{").Replace("}", "}}");
         }
 
     }

@@ -12,6 +12,10 @@ Key:
 >>> Other upcoming
 ]] + Added HTTP server commands (http <port> <register/importConfig/exportConfig> <...> commands
 
+>>> v0.5.0a2 - 27/04/2023
++ Can now use {{ to include { in commands. E.g. "println {{read}}" will print "{read}"
++ Added readraw for reading raw input from CLI. Read now replaces any user-provded { and } with {{ and }}
+* Fixed UdpErrors.UnknownServerCommand showing as FileErrors.UnknownFileManagerCommand
 
 >>> v0.5.0a1 - 26/04/2023
 + Added UDP Server
